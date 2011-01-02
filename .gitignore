@@ -1,0 +1,12 @@
+*.pyc
+.hg*
+django/mac-eater/libs
+django/mac-eater/Geohash/
+django/mac-eater/dbindexer/
+django/mac-eater/django/
+django/mac-eater/django_extensions/
+django/mac-eater/djangoappengine/
+django/mac-eater/djangotoolbox/
+django/mac-eater/filetransfers/
+django/mac-eater/index.yaml
+
