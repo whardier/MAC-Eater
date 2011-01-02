@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from django_extensions.db.fields import CreationDateTimeField
 from django_extensions.db.fields import ModificationDateTimeField
 
-from geohash import geohash
+from Geohash import geohash
 
 from common.models import Name
 from common.models import Text

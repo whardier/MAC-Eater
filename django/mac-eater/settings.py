@@ -6,10 +6,16 @@ import os
 
 from djangoappengine.settings_base import *
 
-DEBUG=True
-TEMPLATE_DEBUG=DEBUG
+import dbindexer
 
 SECRET_KEY = '=r-$b*8hglm+858&9t043hlm6-&6-3d3vfc4((7yd0dbrakhvi'
+
+DATABASES['native'] = DATABASES['default']
+DATABASES['default'] = {'ENGINE': 'dbindexer', 'TARGET': 'native'}
+
+DBINDEXER_SITECONF = 'dbindexes'
+
+AUTH_PROFILE_MODULE = 'accounts.UserProfile'
 
 INSTALLED_APPS = (
     'django.contrib.admin',
@@ -19,7 +25,9 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'djangotoolbox',
     'django_extensions',
+    'dbindexer',
     'common',
+    'accounts',
     'devices',
     'devices.ethernet',
     'devices.bluetooth',
@@ -28,6 +36,7 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'dbindexer.middleware.DBIndexerMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -57,16 +66,6 @@ _ = lambda s: s
 
 LANGUAGES = (
   ('en', _('English')),
+  ('de', _('German')),
 )
 
-# Activate django-dbindexer if available
-try:
-    import dbindexer
-    DATABASES['native'] = DATABASES['default']
-    DATABASES['default'] = {'ENGINE': 'dbindexer', 'TARGET': 'native'}
-    INSTALLED_APPS += ('dbindexer',)
-    DBINDEXER_SITECONF = 'dbindexes'
-    MIDDLEWARE_CLASSES = ('dbindexer.middleware.DBIndexerMiddleware',) + \
-                         MIDDLEWARE_CLASSES
-except ImportError:
-    pass

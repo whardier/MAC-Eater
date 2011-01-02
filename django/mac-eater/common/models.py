@@ -4,7 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from django_extensions.db.fields import UUIDField
 
-from geohash import geohash
+from Geohash import geohash
 
 class Name(models.Model):
     text = models.CharField(max_length=4096)

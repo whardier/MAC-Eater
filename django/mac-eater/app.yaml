@@ -28,5 +28,9 @@ handlers:
   static_files: static/images/favicon.ico
   upload: static/images/favicon.ico
 
+- url: /map.html
+  static_files: static/map.html
+  upload: static/map.html
+
 - url: /.*
   script: djangoappengine/main/main.py

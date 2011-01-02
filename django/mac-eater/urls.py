@@ -15,5 +15,6 @@ urlpatterns = patterns('',
      {'template': 'examples.html'}),
     (r'^admin/', include(admin.site.urls)),
     (r'^version$', 'views.version'),
+    (r'^locationrandom$', 'views.locationrandom'),
 )
 

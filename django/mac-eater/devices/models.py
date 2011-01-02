@@ -10,7 +10,7 @@ from django_extensions.db.fields import ModificationDateTimeField
 
 from common.models import *
 
-from geohash import geohash
+from Geohash import geohash
 
 class DeviceUUID(models.Model):
     uuid = UUIDField()
@@ -62,6 +62,8 @@ class GenericDevice(models.Model):
     port_count = models.IntegerField(_('Logical Port Count'), blank=True, null=True)
     date_created = CreationDateTimeField()
     date_modified = ModificationDateTimeField()
+    motd = models.TextField(_('MOTD'))
+    motd_blacklist = models.TextField(_('MOTD (Blacklisted)'))
 
     class Meta:
         abstract = True
