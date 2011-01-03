@@ -2,7 +2,10 @@ from django.db import models
 
 from django.utils.translation import ugettext_lazy as _
 
+from common import register_geohash_model
 from common.models import *
+
+from devices import register_device
 
 from devices.models import GenericDevice
 from devices.models import GenericDeviceInterface
@@ -11,6 +14,9 @@ class EthernetDevice(GenericDevice):
     class Meta:
          verbose_name = _('Ethernet Device')
          verbose_name_plural = _('Ethernet Devices')
+
+register_device(EthernetDevice)
+register_geohash_model(EthernetDevice)
 
 class EthernetDeviceInterface(GenericDeviceInterface):
     device = models.ForeignKey(EthernetDevice, blank=True, null=True)

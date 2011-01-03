@@ -1,5 +1,7 @@
 from django.db import models
 
+from django.contrib.auth.models import User
+
 from django.utils.translation import ugettext_lazy as _
 
 from django_extensions.db.fields import CreationDateTimeField
@@ -7,8 +9,8 @@ from django_extensions.db.fields import ModificationDateTimeField
 
 from Geohash import geohash
 
-from common.models import Name
-from common.models import Text
+from common import register_geohash_model
+from common.models import *
 
 from devices.models import DeviceUUID
 from devices.models import MACAddressUUID
@@ -19,11 +21,10 @@ class Source(models.Model):
     date_modified = ModificationDateTimeField(_('Creation Date/Time'))
 
 
-class Location(models.Model):
+class Location(GeohashModel):
     source = models.ForeignKey(Source)
     device_uuid = models.ForeignKey(DeviceUUID)
     mac_address_uuid = models.ForeignKey(MACAddressUUID)
-    geohash = models.CharField(_('Geohash'), max_length=12)
     date_created = CreationDateTimeField(_('Creation Date/Time'))
     date_located = models.DateTimeField(_('Address Location Date/Time'))
     date_device_uploaded = models.DateTimeField(_('Device Upload Date/Time')) #The date the device reports uploading the report
@@ -36,3 +37,15 @@ class Location(models.Model):
     def __unicode__(self):
         return unicode(self.geohash)
     
+register_geohash_model(Location)
+
+class Tracker(models.Model):
+    user = models.ForeignKey(User)
+    device_uuid = models.ForeignKey(DeviceUUID)
+
+    class Meta:
+        verbose_name = _('Tracker')
+        verbose_name_plural = _('Trackers')
+
+    def __unicode__(self):
+        return unicode(self.user)

@@ -32,6 +32,8 @@ INSTALLED_APPS = (
     'devices.ethernet',
     'devices.bluetooth',
     'locations',
+    'services',
+    'notifications',
     'djangoappengine',
 )
 
@@ -67,5 +69,5 @@ _ = lambda s: s
 LANGUAGES = (
   ('en', _('English')),
   ('de', _('German')),
+  ('ja', _('Japanese')),
 )
-

@@ -8,6 +8,7 @@ builtins:
 
 inbound_services:
 - warmup
+- mail
 
 handlers:
 - url: /_ah/queue/deferred
